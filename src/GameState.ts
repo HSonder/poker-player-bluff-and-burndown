@@ -25,6 +25,7 @@ interface GameState {
   community_cards: Card[];
   current_buy_in: number;
   pot: number;
+  in_action: number;
 }
 
 export { Card, Player, GameState };

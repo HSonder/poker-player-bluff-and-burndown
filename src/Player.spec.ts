@@ -1,4 +1,5 @@
 import { Player } from './Player';
+import GameStateImpl from './GameStateImpl';
 
 /*
 Test Plan:
@@ -15,8 +16,9 @@ describe('Player', () => {
     var player = new Player();
     var betCallbackResult = 0;
     var betCallback = (bet: number) => { betCallbackResult = bet; };
-    var gameState = {
-      players: [
+    var gameState = new GameStateImpl();
+    gameState.players = 
+      [
         {
           name: "Player 1",
           stack: 1000,
@@ -35,10 +37,10 @@ describe('Player', () => {
           version: "Version name 2",
           id: 1
         }
-      ],
-      in_action: 1,
-      current_buy_in: 320
-    }
+      ]
+    gameState.current_buy_in = 320;
+    gameState.in_action = 1;
+    
     // Act
     player.betRequest(gameState, betCallback)
     
