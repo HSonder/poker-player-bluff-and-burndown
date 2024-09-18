@@ -1,0 +1,48 @@
+import { Player } from './Player';
+
+/*
+Test Plan:
+
+Player makes a call: 
+	current_buy_in - players[in_action][bet] 
+	-> !! Any bet smaller than this amount is treated as a fold
+
+Player raises a bet:
+	current_buy_in - players[in_action][bet] + minimum_raise
+*/
+describe('Player', () => {
+  test('should always make a call', () => {
+    var player = new Player();
+    var betCallbackResult = 0;
+    var betCallback = (bet: number) => { betCallbackResult = bet; };
+    var gameState = {
+      players: [
+        {
+          name: "Player 1",
+          stack: 1000,
+          status: "active",
+          bet: 0,
+          hole_cards: [],
+          version: "Version name 1",
+          id: 0
+        },
+        {
+          name: "Player 2",
+          stack: 1000,
+          status: "active",
+          bet: 0,
+          hole_cards: [],
+          version: "Version name 2",
+          id: 1
+        }
+      ],
+      in_action: 1,
+      current_buy_in: 320
+    }
+    // Act
+    player.betRequest(gameState, betCallback)
+    
+    // Assert
+    expect(betCallbackResult).toBe(320);
+  });
+});
