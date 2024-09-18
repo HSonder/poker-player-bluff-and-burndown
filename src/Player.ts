@@ -34,7 +34,7 @@ export class Player {
   }
 
   public showdown(gameState: GameState): void {
-
+    console.log(`SHOWDOWN gameState: ${JSON.stringify(gameState)}`);
   }
 };
 
