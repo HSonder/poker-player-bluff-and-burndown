@@ -1,21 +1,34 @@
 {
-    "compilerOptions": {
-        "module": "nodenext",
-        "target": "ES2021",
-        "sourceMap": true,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "outDir": "out",
-        "declaration": true,
-        "allowJs": true,
-        "checkJs": true,
-        "strict": true
-    },
-    "exclude": [
-        "out/*",
-        "node_modules",
-        "jest.config.js",
-        "src/*.test.ts",
-        "src/*.spec.ts",
-    ]
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "dist"
+  },
+  "include": ["src/**/*.ts"]
 }
+
+// {
+//     "compilerOptions": {
+//         "module": "nodenext",
+//         "target": "ES2021",
+//         "sourceMap": true,
+//         "emitDecoratorMetadata": true,
+//         "experimentalDecorators": true,
+//         "outDir": "out",
+//         "declaration": true,
+//         "allowJs": true,
+//         "checkJs": true,
+//         "strict": true
+//     },
+//     "exclude": [
+//         "out/*",
+//         "node_modules",
+//         "jest.config.js",
+//         "src/*.test.ts",
+//         "src/*.spec.ts",
+//     ]
+// }
