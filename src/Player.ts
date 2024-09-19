@@ -32,21 +32,40 @@ export class Player {
     }
   }
 
+    private rankValueMap: { [key: string]: number } = {
+      '2': 2,
+      '3': 3,
+      '4': 4,
+      '5': 5,
+      '6': 6,
+      '7': 7,
+      '8': 8,
+      '9': 9,
+      '10': 10,
+      'J': 11,
+      'Q': 12,
+      'K': 13,
+      'A': 14
+  };
+  private getCardValue(rank: string): number {
+    return this.rankValueMap[rank] || 0; // Return 0 if the rank is not found
+  }
+
   private weHaveTwoGoodCards(hole_cards: Card[]) : boolean {
-      return  hole_cards[0].rank == 'A' && parseInt(hole_cards[1].rank) >= 4 ||
-              hole_cards[0].rank == 'K' && parseInt(hole_cards[1].rank) >= 8 ||
-              hole_cards[1].rank == 'A' && parseInt(hole_cards[0].rank) >= 4 ||
-              hole_cards[1].rank == 'K' && parseInt(hole_cards[0].rank) >= 8 ||
-              hole_cards[0].rank == 'Q' && parseInt(hole_cards[1].rank) >= 9 ||
-              hole_cards[1].rank == 'Q' && parseInt(hole_cards[0].rank) >= 9 ||
-              hole_cards[0].rank == 'J' && parseInt(hole_cards[1].rank) >= 9 ||
-              hole_cards[1].rank == 'J' && parseInt(hole_cards[0].rank) >= 9 ||
-              hole_cards[0].rank == '10' && parseInt(hole_cards[1].rank) >= 8 ||
-              hole_cards[1].rank == '10' && parseInt(hole_cards[0].rank) >= 8 ||
-              hole_cards[0].rank == '9' && parseInt(hole_cards[1].rank) >= 8 ||
-              hole_cards[1].rank == '9' && parseInt(hole_cards[0].rank) >= 8 ||
-              hole_cards[0].rank == '8' && parseInt(hole_cards[1].rank) >= 8 ||
-              hole_cards[1].rank == '8' && parseInt(hole_cards[0].rank) >= 8;
+      return  hole_cards[0].rank == 'A' && this.getCardValue(hole_cards[1].rank) >= 4 ||
+              hole_cards[0].rank == 'K' && this.getCardValue(hole_cards[1].rank) >= 8 ||
+              hole_cards[1].rank == 'A' && this.getCardValue(hole_cards[0].rank) >= 4 ||
+              hole_cards[1].rank == 'K' && this.getCardValue(hole_cards[0].rank) >= 8 ||
+              hole_cards[0].rank == 'Q' && this.getCardValue(hole_cards[1].rank) >= 9 ||
+              hole_cards[1].rank == 'Q' && this.getCardValue(hole_cards[0].rank) >= 9 ||
+              hole_cards[0].rank == 'J' && this.getCardValue(hole_cards[1].rank) >= 9 ||
+              hole_cards[1].rank == 'J' && this.getCardValue(hole_cards[0].rank) >= 9 ||
+              hole_cards[0].rank == '10' && this.getCardValue(hole_cards[1].rank) >= 8 ||
+              hole_cards[1].rank == '10' && this.getCardValue(hole_cards[0].rank) >= 8 ||
+              hole_cards[0].rank == '9' && this.getCardValue(hole_cards[1].rank) >= 8 ||
+              hole_cards[1].rank == '9' && this.getCardValue(hole_cards[0].rank) >= 8 ||
+              hole_cards[0].rank == '8' && this.getCardValue(hole_cards[1].rank) >= 8 ||
+              hole_cards[1].rank == '8' && this.getCardValue(hole_cards[0].rank) >= 8;
   }
 
   private weHaveAPair(cards: Card[]) : boolean {

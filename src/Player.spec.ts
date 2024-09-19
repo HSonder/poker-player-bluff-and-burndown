@@ -246,6 +246,25 @@ describe('Player', () => {
     expect(betCallbackResult).toBe(320 + 240);
   });
 
+  test('raises when holecards are King and Q', () => {
+    var player = new Player();
+    var betCallbackResult = 0;
+    var betCallback = (bet: number) => { betCallbackResult = bet; };
+
+    var gameState = new GameStateBuilder()
+        .setHoleCards(0, [
+          ["K", "hearts"],
+          ["Q", "spades"]
+        ])
+        .build();
+
+    // Act
+    player.betRequest(gameState, betCallback);
+
+    // Assert
+    expect(betCallbackResult).toBe(320 + 240);
+  });
+
   test('raises when holecards are Queen and 9-or-higher', () => {
     var player = new Player();
     var betCallbackResult = 0;
