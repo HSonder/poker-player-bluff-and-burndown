@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "module": "nodenext",
+        "module": "commonjs", // Ensure this is set to "commonjs"
         "target": "ES2021",
         "sourceMap": true,
         "emitDecoratorMetadata": true,
@@ -9,13 +9,15 @@
         "declaration": true,
         "allowJs": true,
         "checkJs": true,
-        "strict": true
+        "strict": true,
+        "esModuleInterop": true, // Add this option
+        "resolveJsonModule": true // Add this option
     },
     "exclude": [
         "out/*",
         "node_modules",
         "jest.config.js",
         "src/*.test.ts",
-        "src/*.spec.ts",
+        "src/*.spec.ts"
     ]
 }
