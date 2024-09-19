@@ -22,7 +22,7 @@ export class Player {
         // check if we have a royal flush
 
       } else {
-        nextBet = this.call(gameState);
+        nextBet = this.fold(gameState);
       }
       betCallback(nextBet);
     }
@@ -30,6 +30,9 @@ export class Player {
       console.log(`Error: ${error}`);
       betCallback(0);
     }
+  }
+  private fold(gameState: GameState): any {
+    return 0
   }
 
     private rankValueMap: { [key: string]: number } = {
