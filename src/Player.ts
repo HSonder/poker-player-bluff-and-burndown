@@ -5,10 +5,12 @@ export class Player {
     try 
     {
       console.log(`Show gameState: ${JSON.stringify(gameState)}`);
+      gameState.players[gameState.in_action].hole_cards.splice
       var nextBet;
       if (this.weHaveAceKQJ(gameState.players[gameState.in_action].hole_cards)) {
         nextBet = this.raise(gameState);
-      } else if(this.weHaveAPair(gameState.players[gameState.in_action].hole_cards)) {
+      } else if(
+        this.weHaveAPair(gameState.players[gameState.in_action].hole_cards.concat(gameState.community_cards))) {
         // check if we have a pair
         nextBet = this.raise(gameState);
 
@@ -28,11 +30,23 @@ export class Player {
       betCallback(0);
     }
   }
-  private weHaveAPair(hole_cards: Card[]) : boolean {
-    if (hole_cards.length != 2) {
-      return false;
+
+  private weHaveAPair(cards: Card[]) : boolean {
+    const aMap: { [key: string]: number } = {};
+    let found = false;
+    cards.forEach(card => {
+      if (!aMap[card.rank]) {
+        aMap[card.rank] = 1;
+      } else {
+        aMap[card.rank]++;
+        found = true;
+      }
+    });
+    if (found) {
+      console.log("We have a pair, aMap: " + JSON.stringify(aMap));
     }
-    return hole_cards[0].rank == hole_cards[1].rank;
+    // return cards[0].rank == cards[1].rank;
+    return found;
   }
 
   private call(gameState: GameState) {
