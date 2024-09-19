@@ -4,6 +4,8 @@ export class Player {
   public betRequest(gameState: GameState, betCallback: (bet: number) => void): void {
     try 
     {
+      betCallback(0);
+      return;
       console.log(`Show gameState: ${JSON.stringify(gameState)}`);
       var nextBet;
       if (this.weHaveAceKQJ(gameState.players[gameState.in_action].hole_cards)) {
