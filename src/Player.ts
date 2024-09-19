@@ -8,6 +8,16 @@ export class Player {
       var nextBet;
       if (this.weHaveAceKQJ(gameState.players[gameState.in_action].hole_cards)) {
         nextBet = this.raise(gameState);
+      } else if(this.weHaveAPair(gameState.players[gameState.in_action].hole_cards)) {
+        // check if we have a pair
+        nextBet = this.raise(gameState);
+
+        // check if we have a straight
+        // check if we have a flush
+        // check if we have a full house
+        // check if we have a four of a kind
+        // check if we have a straight flush
+        // check if we have a royal flush
       } else {
         nextBet = this.call(gameState);
       }
@@ -17,6 +27,12 @@ export class Player {
       console.log(`Error: ${error}`);
       betCallback(0);
     }
+  }
+  private weHaveAPair(hole_cards: Card[]) : boolean {
+    if (hole_cards.length != 2) {
+      return false;
+    }
+    return hole_cards[0].rank == hole_cards[1].rank;
   }
 
   private call(gameState: GameState) {
