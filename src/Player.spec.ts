@@ -246,4 +246,99 @@ describe('Player', () => {
     expect(betCallbackResult).toBe(320 + 240);
   });
 
+  test('raises when holecards are Queen and 9-or-higher', () => {
+    var player = new Player();
+    var betCallbackResult = 0;
+    var betCallback = (bet: number) => { betCallbackResult = bet; };
+
+    var gameState = new GameStateBuilder()
+        .setHoleCards(0, [
+          ["Q", "hearts"],
+          ["9", "spades"]
+        ])
+        .build();
+
+    // Act
+    player.betRequest(gameState, betCallback);
+
+    // Assert
+    expect(betCallbackResult).toBe(320 + 240);
+  });
+
+  test('raises when holecards are Jack and 9-or-higher', () => {
+    var player = new Player();
+    var betCallbackResult = 0;
+    var betCallback = (bet: number) => { betCallbackResult = bet; };
+
+    var gameState = new GameStateBuilder()
+        .setHoleCards(0, [
+          ["J", "hearts"],
+          ["9", "spades"]
+        ])
+        .build();
+
+    // Act
+    player.betRequest(gameState, betCallback);
+
+    // Assert
+    expect(betCallbackResult).toBe(320 + 240);
+  });
+
+  test('raises when holecards are 10 and 8-or-higher', () => {
+    var player = new Player();
+    var betCallbackResult = 0;
+    var betCallback = (bet: number) => { betCallbackResult = bet; };
+
+    var gameState = new GameStateBuilder()
+        .setHoleCards(0, [
+          ["10", "hearts"],
+          ["8", "spades"]
+        ])
+        .build();
+
+    // Act
+    player.betRequest(gameState, betCallback);
+
+    // Assert
+    expect(betCallbackResult).toBe(320 + 240);
+  });
+
+  test('raises when holecards are 9 and 8-or-higher', () => {
+    var player = new Player();
+    var betCallbackResult = 0;
+    var betCallback = (bet: number) => { betCallbackResult = bet; };
+
+    var gameState = new GameStateBuilder()
+        .setHoleCards(0, [
+          ["9", "hearts"],
+          ["8", "spades"]
+        ])
+        .build();
+
+    // Act
+    player.betRequest(gameState, betCallback);
+
+    // Assert
+    expect(betCallbackResult).toBe(320 + 240);
+  });
+
+  test('raises when holecards are 8 and 8-or-higher', () => {
+    var player = new Player();
+    var betCallbackResult = 0;
+    var betCallback = (bet: number) => { betCallbackResult = bet; };
+
+    var gameState = new GameStateBuilder()
+        .setHoleCards(0, [
+          ["8", "hearts"],
+          ["8", "spades"]
+        ])
+        .build();
+
+    // Act
+    player.betRequest(gameState, betCallback);
+
+    // Assert
+    expect(betCallbackResult).toBe(320 + 240);
+  });
+
 });

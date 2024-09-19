@@ -36,7 +36,17 @@ export class Player {
       return  hole_cards[0].rank == 'A' && parseInt(hole_cards[1].rank) >= 4 ||
               hole_cards[0].rank == 'K' && parseInt(hole_cards[1].rank) >= 8 ||
               hole_cards[1].rank == 'A' && parseInt(hole_cards[0].rank) >= 4 ||
-              hole_cards[1].rank == 'K' && parseInt(hole_cards[0].rank) >= 8;
+              hole_cards[1].rank == 'K' && parseInt(hole_cards[0].rank) >= 8 ||
+              hole_cards[0].rank == 'Q' && parseInt(hole_cards[1].rank) >= 9 ||
+              hole_cards[1].rank == 'Q' && parseInt(hole_cards[0].rank) >= 9 ||
+              hole_cards[0].rank == 'J' && parseInt(hole_cards[1].rank) >= 9 ||
+              hole_cards[1].rank == 'J' && parseInt(hole_cards[0].rank) >= 9 ||
+              hole_cards[0].rank == '10' && parseInt(hole_cards[1].rank) >= 8 ||
+              hole_cards[1].rank == '10' && parseInt(hole_cards[0].rank) >= 8 ||
+              hole_cards[0].rank == '9' && parseInt(hole_cards[1].rank) >= 8 ||
+              hole_cards[1].rank == '9' && parseInt(hole_cards[0].rank) >= 8 ||
+              hole_cards[0].rank == '8' && parseInt(hole_cards[1].rank) >= 8 ||
+              hole_cards[1].rank == '8' && parseInt(hole_cards[0].rank) >= 8;
   }
 
   private weHaveAPair(cards: Card[]) : boolean {
