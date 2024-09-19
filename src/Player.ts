@@ -8,7 +8,7 @@ export class Player {
       gameState.players[gameState.in_action].hole_cards.splice
       var nextBet;
       if (this.weHaveTwoGoodCards(gameState.players[gameState.in_action].hole_cards)) {
-        nextBet = this.raise(gameState);
+        nextBet = this.raiseHigh(gameState);
       } else if(
         this.weHaveAPair(gameState.players[gameState.in_action].hole_cards.concat(gameState.community_cards))) {
         // check if we have a pair
@@ -97,6 +97,11 @@ export class Player {
   private raise(gameState: GameState) {
     return gameState.current_buy_in - gameState.players[gameState.in_action].bet +
       gameState.minimum_raise;
+  }
+
+  private raiseHigh(gameState: GameState) {
+    return gameState.current_buy_in - gameState.players[gameState.in_action].bet +
+      gameState.minimum_raise + 100;
   }
 
   private weHaveAceKQJ(holeCards: Card[]) {

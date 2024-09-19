@@ -378,5 +378,24 @@ describe('Player', () => {
     // Assert
     expect(betCallbackResult).toBe(0);
   });
+  test('raise high when holecards are good or pair', () => {
+    var player = new Player();
+    var betCallbackResult = 0;
+    var betCallback = (bet: number) => { betCallbackResult = bet; };
+
+    var gameState = new GameStateBuilder()
+        .setHoleCards(0, [
+          ["Q", "hearts"],
+          ["10", "spades"]
+        ])
+        .build();
+
+    // Act
+    player.betRequest(gameState, betCallback);
+
+    // Assert
+    expect(betCallbackResult).toBe(320+240+100);
+  });
+
 
 });
