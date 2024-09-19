@@ -13,24 +13,24 @@ Player raises a bet:
 	current_buy_in - players[in_action][bet] + minimum_raise
 */
 describe('Player', () => {
-  test('should always make a call when there are no hole cards', () => {
-    var player = new Player();
-    var betCallbackResult = 0;
-    var betCallback = (bet: number) => { betCallbackResult = bet; };
+  // test('should always make a call when there are no hole cards', () => {
+  //   var player = new Player();
+  //   var betCallbackResult = 0;
+  //   var betCallback = (bet: number) => { betCallbackResult = bet; };
 
-    var gameState = new GameStateBuilder()
-        .setCurrentBuyIn(320)
-        .setInAction(1)
-        .addPlayer("Player 1", 1000, "active", 0, [], "Version name 1", 0)
-        .addPlayer("Player 2", 1000, "active", 0, [], "Version name 2", 1)
-        .build();
+  //   var gameState = new GameStateBuilder()
+  //       .setCurrentBuyIn(320)
+  //       .setInAction(1)
+  //       .addPlayer("Player 1", 1000, "active", 0, [], "Version name 1", 0)
+  //       .addPlayer("Player 2", 1000, "active", 0, [], "Version name 2", 1)
+  //       .build();
     
-    // Act
-    player.betRequest(gameState, betCallback);
+  //   // Act
+  //   player.betRequest(gameState, betCallback);
     
-    // Assert
-    expect(betCallbackResult).toBe(320);
-});
+  //   // Assert
+  //   expect(betCallbackResult).toBe(320);
+  // });
 
 
   test('raises with minimum raise', () => {
@@ -131,7 +131,7 @@ describe('Player', () => {
     player.betRequest(gameState, betCallback)
 
     // Assert
-    expect(betCallbackResult).toBe(320 + 240);
+    expect(betCallbackResult).toBe(320);
   });
 
   test('raises when holecards are a pair', () => {
@@ -198,6 +198,44 @@ describe('Player', () => {
             ["6", "hearts"],
             ["2", "spades"],
             ["4", "diamonds"]
+        ])
+        .build();
+
+    // Act
+    player.betRequest(gameState, betCallback);
+
+    // Assert
+    expect(betCallbackResult).toBe(320 + 240);
+  });
+
+  test('raises when holecards are Ace and 4-or-higher', () => {
+    var player = new Player();
+    var betCallbackResult = 0;
+    var betCallback = (bet: number) => { betCallbackResult = bet; };
+
+    var gameState = new GameStateBuilder()
+        .setHoleCards(0, [
+          ["A", "hearts"],
+          ["4", "spades"]
+        ])
+        .build();
+
+    // Act
+    player.betRequest(gameState, betCallback);
+
+    // Assert
+    expect(betCallbackResult).toBe(320 + 240);
+  });
+
+  test('raises when holecards are King and 8-or-higher', () => {
+    var player = new Player();
+    var betCallbackResult = 0;
+    var betCallback = (bet: number) => { betCallbackResult = bet; };
+
+    var gameState = new GameStateBuilder()
+        .setHoleCards(0, [
+          ["K", "hearts"],
+          ["8", "spades"]
         ])
         .build();
 

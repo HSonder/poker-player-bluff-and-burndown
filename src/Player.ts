@@ -7,7 +7,7 @@ export class Player {
       console.log(`Show gameState: ${JSON.stringify(gameState)}`);
       gameState.players[gameState.in_action].hole_cards.splice
       var nextBet;
-      if (this.weHaveAceKQJ(gameState.players[gameState.in_action].hole_cards)) {
+      if (this.weHaveTwoGoodCards(gameState.players[gameState.in_action].hole_cards)) {
         nextBet = this.raise(gameState);
       } else if(
         this.weHaveAPair(gameState.players[gameState.in_action].hole_cards.concat(gameState.community_cards))) {
@@ -20,6 +20,7 @@ export class Player {
         // check if we have a four of a kind
         // check if we have a straight flush
         // check if we have a royal flush
+
       } else {
         nextBet = this.call(gameState);
       }
@@ -29,6 +30,13 @@ export class Player {
       console.log(`Error: ${error}`);
       betCallback(0);
     }
+  }
+
+  private weHaveTwoGoodCards(hole_cards: Card[]) : boolean {
+      return  hole_cards[0].rank == 'A' && parseInt(hole_cards[1].rank) >= 4 ||
+              hole_cards[0].rank == 'K' && parseInt(hole_cards[1].rank) >= 8 ||
+              hole_cards[1].rank == 'A' && parseInt(hole_cards[0].rank) >= 4 ||
+              hole_cards[1].rank == 'K' && parseInt(hole_cards[0].rank) >= 8;
   }
 
   private weHaveAPair(cards: Card[]) : boolean {
