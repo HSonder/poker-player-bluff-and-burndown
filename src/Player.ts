@@ -2,14 +2,21 @@ import { Card, GameState } from "./GameState";
 
 export class Player {
   public betRequest(gameState: GameState, betCallback: (bet: number) => void): void {
-    console.log(`Show gameState: ${JSON.stringify(gameState)}`);
-    var nextBet;
-    if (this.weHaveAceKQJ(gameState.players[gameState.in_action].hole_cards)) {
-      nextBet = this.raise(gameState);
-    } else {
-      nextBet = this.call(gameState);
+    try 
+    {
+      console.log(`Show gameState: ${JSON.stringify(gameState)}`);
+      var nextBet;
+      if (this.weHaveAceKQJ(gameState.players[gameState.in_action].hole_cards)) {
+        nextBet = this.raise(gameState);
+      } else {
+        nextBet = this.call(gameState);
+      }
+      betCallback(nextBet);
     }
-    betCallback(nextBet);
+    catch (error) {
+      console.log(`Error: ${error}`);
+      betCallback(0);
+    }
   }
 
   private call(gameState: GameState) {
